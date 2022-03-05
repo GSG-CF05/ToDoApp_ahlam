@@ -1,5 +1,6 @@
 //selectors
 document.querySelector('form').addEventListener('submit', handleSubmitForm);
+document.addEventListener('DOMContentLoaded', getTodoListonOnLoad);
 let todos = [];
 
 
@@ -10,7 +11,10 @@ function handleSubmitForm(e){
     let input = document.querySelector('input');
     if (input.value != '');
        addTodo(input.value);
-       input.value =''; 
+
+
+       saveToLocalStorage(input.value);
+        input.value =''; 
 }
 
 
@@ -28,3 +32,30 @@ function addTodo(todo){
     ul.appendChild(li); 
     
 }
+
+//save localStorag
+
+function saveToLocalStorage(todo) {
+    todos.push(todo)
+    localStorage.setItem('todos', JSON.stringify(todos))
+ }
+
+
+
+//OnLoad 
+
+function getTodoListonOnLoad(){
+     if (localStorage.getItem('todos')){
+         todos= JSON.parse(localStorage.getItem('todos'))
+        
+     }
+     todos.forEach((todo) =>{
+        let li = document.createElement('li');
+
+        li.classList.add('todo-List-item');
+        ul.appendChild(li);
+        
+     })
+ }
+
+
