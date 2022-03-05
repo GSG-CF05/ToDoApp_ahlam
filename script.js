@@ -62,9 +62,7 @@ function checkTodo(e){
 function deleteTodo(e) {
     let item = e.target.parentNode;
     item.remove();
-    
 }
-
 //save localStorag
 
 function saveToLocalStorage(todo) {
@@ -89,5 +87,4 @@ function getTodoListonOnLoad(){
         
      })
  }
-
 
