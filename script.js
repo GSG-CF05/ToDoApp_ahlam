@@ -1,6 +1,9 @@
 //selectors
 document.querySelector('form').addEventListener('submit', handleSubmitForm);
 document.addEventListener('DOMContentLoaded', getTodoListonOnLoad);
+document.querySelector('ul').addEventListener('click',handelClickDeletOrCheck);
+document.getElementById('clearAll').addEventListener('click' , handleClearAll);
+
 let todos = [];
 
 
@@ -15,6 +18,7 @@ function handleSubmitForm(e){
 
        saveToLocalStorage(input.value);
         input.value =''; 
+
 }
 
 
@@ -30,6 +34,34 @@ function addTodo(todo){
        `;
     li.classList.add('todo-List-item');
     ul.appendChild(li); 
+    
+}
+
+function handelClickDeletOrCheck(e){
+    if(e.target.name =='checkButton')
+    checkTodo(e);
+
+    if(e.target.name =='deletButton')
+    deleteTodo(e);
+}
+
+function handleClearAll(e) {
+    document.querySelector('ul').innerHTML = '';
+}
+
+
+//delet and check
+function checkTodo(e){
+    let item = e.target.parentNode;
+    if(item.style.textDecoration == 'line-through')
+    item.style.textDecoration = 'none'
+    else 
+       item.style.textDecoration = 'line-through';
+}
+
+function deleteTodo(e) {
+    let item = e.target.parentNode;
+    item.remove();
     
 }
 
